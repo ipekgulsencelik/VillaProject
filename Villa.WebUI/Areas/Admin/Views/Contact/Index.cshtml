@@ -1,0 +1,55 @@
+﻿@model List<ResultContactDTO>
+
+@{
+    ViewData["Title"] = "İletişim Bilgileri";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>ID :</th>
+            <td>@Model[0].ID</td>
+        </tr>
+        <tr>
+            <th>Link :</th>
+            <td><a href="@Model[0].MapURL" target="_blank">Konum</a></td>
+        </tr>
+        <tr>
+            <th>Mail Adresi :</th>
+            <td>@Model[0].Email</td>
+        </tr>
+        <tr>
+            <th>Telefon Numarası :</th>
+            <td>@Model[0].Phone</td>
+        </tr>
+    </table>
+    <a href="/Admin/Contact/UpdateContact/@Model[0].ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Güncelle</a>
+}
+else
+{
+    <p>Kayıtlı Herhangi Bir İletişim Bilgisi Verisi Bulunmamaktatır.</p>
+    <br />
+    <a href="/Admin/Contact/CreateContact/" class="btn btn-outline-dark"><i class="la la-plus-circle"></i> Yeni İletişim Bilgisi Ekle</a>
+}
+
+<script>
+    function deleteBanner(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Banner/DeleteBanner?id=" + id;
+            }
+        });
+    }
+</script>
