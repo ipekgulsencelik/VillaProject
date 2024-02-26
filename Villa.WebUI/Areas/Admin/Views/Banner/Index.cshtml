@@ -1,0 +1,62 @@
+﻿@model List<ResultBannerDTO>
+
+@{
+    ViewData["Title"] = "Banner Listesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Şehir</th>
+            <th>Başlık</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.ID</td>
+                <td>@item.City</td>
+                <td>@item.Title</td>
+                <td>
+                    <a href="#" onclick="return deleteBanner('@item.ID')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
+                </td>
+                <td>
+                    <a href="/Admin/Banner/UpdateBanner/@item.ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Güncelle</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Kayıtlı Herhangi Bir Banner Verisi Bulunmamaktatır.</p>
+}
+<a href="/Admin/Banner/CreateBanner/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Banner</a>
+
+<script>
+    function deleteBanner(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Banner/DeleteBanner?id=" + id;
+            }
+        });
+    }
+</script>
