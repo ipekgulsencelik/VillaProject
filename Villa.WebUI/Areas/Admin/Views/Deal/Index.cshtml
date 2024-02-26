@@ -1,0 +1,72 @@
+﻿@model List<ResultDealDTO>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>#</th>
+            <th>İlan Türü</th>
+            <th>Resim URL</th>
+            <th>Başlık</th>
+            <th>Açıklama</th>
+            <th>m2</th>
+            <th>Kat</th>
+            <th>Park Alanı</th>
+            <th>Ödeme</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.Type</td>
+                <td>@item.ImageURL</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.Square</td>
+                <td>@item.Floor</td>
+                <td>@item.HasParkingArea</td>
+                <td>@item.PaymentType</td>
+                <td>
+                    <a href="#" onclick="return deleteDeal('@item.ID')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
+                </td>
+                <td>
+                    <a href="/Admin/Deal/UpdateDeal/@item.ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Güncelle</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Kayıtlı Herhangi Bir Teklif Verisi Bulunmamaktatır.</p>
+}
+<a href="/Admin/Deal/CreateDeal/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Teklif Ekle</a>
+
+<script>
+    function deleteDeal(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Deal/DeleteDeal?id=" + id;
+            }
+        });
+    }
+</script>v

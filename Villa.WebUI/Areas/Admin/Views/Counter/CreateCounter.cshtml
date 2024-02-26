@@ -1,0 +1,16 @@
+﻿@model CreateCounterDTO
+
+@{
+    ViewData["Title"] = "Yeni Sayısal Değer Bilgisi Ekleme Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <label>Başlık</label>
+    <input type="text" asp-for="Title" class="form-control" />
+    <br />
+    <label>Değer</label>
+    <input type="text" asp-for="Count" class="form-control" />
+    <br />
+    <button class="btn btn-outline-dark"><i class="la la-save"></i> Kaydet</button>
+</form>

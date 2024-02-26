@@ -1,0 +1,62 @@
+﻿@model List<ResultCounterDTO>
+
+@{
+    ViewData["Title"] = "Sayısal Değerler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Başlık</th>
+            <th>Değer</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.ID</td>
+                <td>@item.Title</td>
+                <td>@item.Count</td>
+                <td>
+                    <a href="#" onclick="return deleteCounter('@item.ID')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
+                </td>
+                <td>
+                    <a href="/Admin/Counter/UpdateCounter/@item.ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Güncelle</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Kayıtlı Herhangi Bir Sayısal Değer Verisi Bulunmamaktatır.</p>
+}
+<a href="/Admin/Counter/CreateCounter/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Sayısal Değer</a>
+
+<script>
+    function deleteCounter(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Counter/DeleteCounter?id=" + id;
+            }
+        });
+    }
+</script>
