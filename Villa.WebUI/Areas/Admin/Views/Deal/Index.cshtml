@@ -33,10 +33,17 @@
                 <td>@item.Type</td>
                 <td>@item.ImageURL</td>
                 <td>@item.Title</td>
-                <td>@item.Description</td>
+                @if (item.Description.Length > 50 )
+                {
+                    <td><a href="#" id="DescriptionBtn" onclick="return showDescription('@item.Description', '@item.ID')">@item.Description.Substring(0, 50)...</a></td>
+                }
+                else
+                {
+                    <td>@item.Description)</td>
+                }
                 <td>@item.Square</td>
                 <td>@item.Floor</td>
-                <td>@item.HasParkingArea</td>
+                <td>@(item.HasParkingArea ? "Var" : "Yok")</td>
                 <td>@item.PaymentType</td>
                 <td>
                     <a href="#" onclick="return deleteDeal('@item.ID')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
@@ -55,6 +62,23 @@ else
 <a href="/Admin/Deal/CreateDeal/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Teklif Ekle</a>
 
 <script>
+    function showDescription(description, id) {
+        Swal.fire({
+            title: 'Açıklama',
+            text: description,
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonText: 'Güncelle',
+            cancelButtonText: 'Tamam'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Deal/UpdateDeal?id=" + id;
+            }
+        });
+    }
+</script>
+
+<script>
     function deleteDeal(id) {
         Swal.fire({
             title: 'Silmek istediğinize emin misiniz?',
@@ -69,4 +93,4 @@ else
             }
         });
     }
-</script>v
+</script>

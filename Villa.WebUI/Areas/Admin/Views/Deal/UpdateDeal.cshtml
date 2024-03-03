@@ -1,11 +1,14 @@
-﻿@model CreateDealDTO
+﻿@model UpdateDealDTO
 
 @{
-    ViewData["Title"] = "Yeni Teklif Ekleme Sayfası";
+    ViewData["Title"] = "Teklif Güncelleme Sayfası";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <form method="post">
+    <label>ID</label>
+    <input type="text" asp-for="ID" disabled class="form-control" />
+    <br />
     <label>İlan Türü</label>
     <input type="text" asp-for="Type" class="form-control" />
     <br />
@@ -37,5 +40,5 @@
         <option value="false">Yok</option>
     </select>
     <br />
-    <button class="btn btn-outline-dark"><i class="la la-save"></i> Kaydet</button>
+    <button class="btn btn-outline-dark"><i class="la la-save"></i> Güncelle</button>
 </form>
