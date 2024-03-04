@@ -17,6 +17,7 @@ namespace Villa.DataAccess.Context
 		public DbSet<Message> Messages { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<Video> Videos { get; set; }
+		public DbSet<SubHeader> SubHeaders { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
@@ -29,6 +30,7 @@ namespace Villa.DataAccess.Context
 			modelBuilder.Entity<Message>(x => x.ToCollection("Messages"));
 			modelBuilder.Entity<Product>(x => x.ToCollection("Products"));
 			modelBuilder.Entity<Video>(x => x.ToCollection("Videos"));
+			modelBuilder.Entity<SubHeader>(x => x.ToCollection("SubHeaders"));
 		}
 	}
 }

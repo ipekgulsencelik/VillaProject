@@ -6,6 +6,9 @@ using Villa.DTO.DTOs.DealDTOs;
 using Villa.DTO.DTOs.FeatureDTOs;
 using Villa.DTO.DTOs.MessageDTOs;
 using Villa.DTO.DTOs.ProductDTOs;
+using Villa.DTO.DTOs.QuestionDTOs;
+using Villa.DTO.DTOs.SubHeaderDTOs;
+using Villa.DTO.DTOs.VideoDTOs;
 using Villa.Entity.Entities;
 
 namespace Villa.WebUI.Mappings
@@ -40,6 +43,18 @@ namespace Villa.WebUI.Mappings
             CreateMap<ResultProductDTO, Product>().ReverseMap();
             CreateMap<UpdateProductDTO, Product>().ReverseMap();
             CreateMap<CreateProductDTO, Product>().ReverseMap();
+
+            CreateMap<ResultQuestionDTO, FrequentlyQuestion>().ReverseMap();
+            CreateMap<UpdateQuestionDTO, FrequentlyQuestion>().ReverseMap();
+            CreateMap<CreateQuestionDTO, FrequentlyQuestion>().ReverseMap();
+
+            CreateMap<ResultVideoDTO, Video>().ReverseMap();
+            CreateMap<UpdateVideoDTO, Video>().ReverseMap();
+            CreateMap<CreateVideoDTO, Video>().ReverseMap();
+
+            CreateMap<ResultSubHeaderDTO, SubHeader>().ReverseMap();
+            CreateMap<UpdateSubHeaderDTO, SubHeader>().ReverseMap();
+            CreateMap<CreateSubHeaderDTO, SubHeader>().ReverseMap();
         }
     }
 }
