@@ -1,0 +1,62 @@
+﻿@model List<ResultMessageDTO>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Gönderen</th>
+            <th>Email</th>
+            <th>Konu</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@item.Name</td>
+                <td>@item.Email</td>
+                <td>@item.Subject</td>
+                <td>
+                    <a href="#" onclick="return deleteMessage('@item.ID', '@item.Subject', '@item.Name')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
+                </td>
+                <td>
+                    <a href="/Admin/Message/MessageDetails/@item.ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Mesaj</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Kayıtlı Herhangi Bir Mesaj Verisi Bulunmamaktatır.</p>
+}
+<a href="/Admin/Message/CreateMessage/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Mesaj Ekle</a>
+
+<script>
+    function deleteMessage(id, subject, name) {
+        Swal.fire({
+            title: name + ' kişisinin gönderdiği ' + subject + ' konulu mesajı silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Message/DeleteMessage?id=" + id;
+            }
+        });
+    }
+</script>

@@ -4,6 +4,7 @@ using Villa.DTO.DTOs.ContactDTOs;
 using Villa.DTO.DTOs.CounterDTOs;
 using Villa.DTO.DTOs.DealDTOs;
 using Villa.DTO.DTOs.FeatureDTOs;
+using Villa.DTO.DTOs.MessageDTOs;
 using Villa.Entity.Entities;
 
 namespace Villa.WebUI.Mappings
@@ -31,6 +32,9 @@ namespace Villa.WebUI.Mappings
             CreateMap<ResultFeatureDTO, Feature>().ReverseMap();
             CreateMap<UpdateFeatureDTO, Feature>().ReverseMap();
             CreateMap<CreateFeatureDTO, Feature>().ReverseMap();
+
+            CreateMap<ResultMessageDTO, Message>().ReverseMap();
+            CreateMap<CreateMessageDTO, Message>().ReverseMap();
         }
     }
 }
