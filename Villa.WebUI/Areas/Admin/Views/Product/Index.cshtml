@@ -1,7 +1,7 @@
-﻿@model List<ResultFeatureDTO>
+﻿@model List<ResultProductDTO>
 
 @{
-    ViewData["Title"] = "Öne Çıkanlar";
+    ViewData["Title"] = "Mülklerimiz";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     int count = 0;
 }
@@ -16,29 +16,29 @@
             <th>#</th>
             <th>Resim</th>
             <th>Başlık</th>
-            <th>Alt-Başlık</th>
-            <th>m2</th>
-            <th>Kontrat Türü</th>
-            <th>Güvenlik</th>
+            <th>Kategori</th>
+            <th>Fiyat</th>
             <th>Sil</th>
             <th>Güncelle</th>
+            <th>Detay</th>
         </tr>
         @foreach (var item in Model)
         {
             count++;
             <tr>
                 <td>@count</td>
-                <td><img src="@item.ImageURL" style="height:50px; width:50px" /></td>
+                <td><img src="@item.ImageURL" style="height:75px; width:75px" /></td>
                 <td>@item.Title</td>
-                <td>@item.SubTitle</td>
-                <td>@item.Square</td>
-                <td>@item.Contract</td>
-                <td>@(item.HasSafety ? "Var" : "Yok")</td>
+                <td>@item.Category</td>
+                <td>@item.Price ₺</td>
                 <td>
-                    <a href="#" onclick="return deleteFeature('@item.ID')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
+                    <a href="#" onclick="return deleteProduct('@item.ID')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
                 </td>
                 <td>
-                    <a href="/Admin/Feature/UpdateFeature/@item.ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Güncelle</a>
+                    <a href="/Admin/Product/UpdateProduct/@item.ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Güncelle</a>
+                </td>
+                <td>
+                    <a href="/Admin/Product/ProductDetails/@item.ID" class="btn btn-outline-primary"><i class="la la-list"></i> Detaylar</a>
                 </td>
             </tr>
         }
@@ -46,12 +46,12 @@
 }
 else
 {
-    <p>Kayıtlı Herhangi Bir Öne Çıkan Bilgisi Verisi Bulunmamaktatır.</p>
+    <p>Kayıtlı Herhangi Bir Mülk Verisi Bulunmamaktatır.</p>
 }
-<a href="/Admin/Feature/CreateFeature/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Önce Çıkan Bilgisi Ekle</a>
+<a href="/Admin/Product/CreateProduct/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Mülk Ekle</a>
 
 <script>
-    function deleteFeature(id) {
+    function deleteProduct(id) {
         Swal.fire({
             title: 'Silmek istediğinize emin misiniz?',
             text: 'Bu öğeyi silerseniz geri alamazsınız!',
@@ -61,7 +61,7 @@ else
             cancelButtonText: 'İptal'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/Admin/Feature/DeleteFeature?id=" + id;
+                window.location.href = "/Admin/Product/DeleteProduct?id=" + id;
             }
         });
     }
