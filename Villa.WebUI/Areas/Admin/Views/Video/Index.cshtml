@@ -1,0 +1,58 @@
+﻿@model List<ResultVideoDTO>
+
+@{
+    ViewData["Title"] = "Video";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Video Link</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td><a href="@item.VideoURL" target="_blank">Video</a></td>
+                <td>
+                    <a href="#" onclick="return deleteVideo('@item.ID')" class="btn btn-outline-danger"><i class="la la-trash"></i> Sil</a>
+                </td>
+                <td>
+                    <a href="/Admin/Video/UpdateVideo/@item.ID" class="btn btn-outline-info"><i class="la la-pencil"></i> Güncelle</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Kayıtlı Herhangi Bir Video URL Verisi Bulunmamaktatır.</p>
+}
+<a href="/Admin/Video/CreateVideo/" class="btn btn-outline-primary"><i class="la la-plus-circle"></i> Yeni Video URL Ekle</a>
+
+<script>
+    function deleteVideo(id) {
+        Swal.fire({
+            title: 'Silmek istediğinize emin misiniz?',
+            text: 'Bu öğeyi silerseniz geri alamazsınız!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sil',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Video/DeleteVideo?id=" + id;
+            }
+        });
+    }
+</script>

@@ -1,0 +1,13 @@
+﻿@model CreateVideoDTO
+
+@{
+    ViewData["Title"] = "Yeni Video Ekleme Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <label>Video URL</label>
+    <input type="text" asp-for="VideoURL" class="form-control" />
+    <br />
+    <button class="btn btn-outline-dark"><i class="la la-save"></i> Kaydet</button>
+</form>

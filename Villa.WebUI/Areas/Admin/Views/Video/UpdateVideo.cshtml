@@ -1,0 +1,16 @@
+﻿@model UpdateVideoDTO
+
+@{
+    ViewData["Title"] = "Video Linki Güncelleme Sayfası";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<form method="post">
+    <label>ID</label>
+    <input type="text" asp-for="ID" disabled class="form-control" />
+    <br />
+    <label>Video URL</label>
+    <input type="text" asp-for="VideoURL" class="form-control" />
+    <br />
+    <button class="btn btn-outline-dark"><i class="la la-save"></i> Güncelle</button>
+</form>
